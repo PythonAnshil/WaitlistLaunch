@@ -46,6 +46,26 @@
     background-color: rgba(var(--bs-success-rgb), 0.05);
 }
 
+/* Mobile-specific drop zone */
+.drop-zone-mobile {
+    border: 2px solid var(--bs-primary);
+    padding: 1.5rem 1rem;
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+}
+
+.drop-zone-mobile:active {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+    transform: scale(0.98);
+}
+
+.drop-zone-mobile p {
+    margin-bottom: 0.5rem;
+}
+
+.drop-zone-mobile .text-muted {
+    font-size: 0.85rem;
+}
+
 .file-list {
     max-height: 200px;
     overflow-y: auto;
@@ -57,18 +77,90 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.85);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 9999;
     color: white;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.loading-content {
+    background-color: rgba(33, 37, 41, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 90%;
+    width: 320px;
 }
 
 .spinner {
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+/* Animated dots for loading indicator */
+.progress-indicator {
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    line-height: 1;
+    height: 2rem;
+}
+
+.progress-indicator .dot {
+    animation: dot-pulse 1.5s infinite;
+    opacity: 0;
+}
+
+.dot1 {
+    animation-delay: 0s !important;
+}
+
+.dot2 {
+    animation-delay: 0.3s !important;
+}
+
+.dot3 {
+    animation-delay: 0.6s !important;
+}
+
+@keyframes dot-pulse {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Mobile touch improvements */
+.touch-device .btn, 
+.touch-device .nav-link,
+.touch-device .dropdown-item {
+    padding: 0.6rem 1rem;
+}
+
+.btn-touch-active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+.dropdown-menu-touch {
+    padding: 0.5rem 0;
+}
+
+.dropdown-menu-touch .dropdown-item {
+    padding: 0.75rem 1.5rem;
 }
 
 /* Custom form styling */
@@ -99,6 +191,19 @@
 
 .pulse {
     animation: pulse 1.5s infinite;
+}
+
+/* Mobile Alert Styling */
+.alert-mobile {
+    position: sticky;
+    top: 1rem;
+    z-index: 1030;
+    border-left-width: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.alert-mobile .btn-close {
+    padding: 0.75rem;
 }
 
 /* Mobile-specific improvements */
@@ -154,5 +259,26 @@
     .footer .text-md-end {
         text-align: center !important;
         margin-top: 1rem;
+    }
+    
+    /* Mobile file list improvements */
+    .file-list {
+        max-height: 180px;
+    }
+    
+    .list-group-item {
+        padding: 0.75rem;
+    }
+    
+    /* Improve form readability on mobile */
+    .form-control {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+    }
+    
+    /* Improve alerts container on mobile */
+    #alerts-container {
+        position: sticky;
+        top: 70px;
+        z-index: 1030;
     }
 }

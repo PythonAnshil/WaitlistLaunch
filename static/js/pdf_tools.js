@@ -9,10 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
 // Initialize drag and drop file upload zones
 function initDropZones() {
     const dropZones = document.querySelectorAll('.drop-zone');
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
     dropZones.forEach(zone => {
         const input = zone.querySelector('input[type="file"]');
         const fileListElement = document.getElementById(zone.dataset.listId);
+        
+        // Add mobile-specific adjustments
+        if (isMobile) {
+            zone.classList.add('drop-zone-mobile');
+            
+            // Modify text for mobile
+            const paragraphs = zone.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                if (p.textContent.includes('Drag & drop')) {
+                    p.textContent = p.textContent.replace('Drag & drop', 'Tap to select');
+                }
+            });
+            
+            // Optimize icon spacing
+            const uploadIcon = zone.querySelector('.fa-cloud-upload-alt');
+            if (uploadIcon) {
+                uploadIcon.classList.add('mb-2');
+                uploadIcon.classList.remove('mb-3');
+            }
+        }
         
         // Show files when selected through input
         if (input) {
@@ -21,41 +42,54 @@ function initDropZones() {
             });
         }
         
-        // Prevent default drag behaviors
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            zone.addEventListener(eventName, preventDefaults, false);
-        });
-        
-        // Highlight drop zone when item is dragged over it
-        ['dragenter', 'dragover'].forEach(eventName => {
-            zone.addEventListener(eventName, () => {
-                zone.classList.add('active');
-            }, false);
-        });
-        
-        ['dragleave', 'drop'].forEach(eventName => {
-            zone.addEventListener(eventName, () => {
-                zone.classList.remove('active');
-            }, false);
-        });
-        
-        // Handle dropped files
-        zone.addEventListener('drop', (e) => {
-            if (input) {
-                if (input.multiple) {
-                    input.files = e.dataTransfer.files;
-                } else {
-                    // For single file inputs, just use the first file
-                    const dt = new DataTransfer();
-                    dt.items.add(e.dataTransfer.files[0]);
-                    input.files = dt.files;
+        if (!isMobile) {
+            // Desktop: Prevent default drag behaviors
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                zone.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            // Highlight drop zone when item is dragged over it
+            ['dragenter', 'dragover'].forEach(eventName => {
+                zone.addEventListener(eventName, () => {
+                    zone.classList.add('active');
+                }, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                zone.addEventListener(eventName, () => {
+                    zone.classList.remove('active');
+                }, false);
+            });
+            
+            // Handle dropped files
+            zone.addEventListener('drop', (e) => {
+                if (input) {
+                    if (input.multiple) {
+                        input.files = e.dataTransfer.files;
+                    } else {
+                        // For single file inputs, just use the first file
+                        const dt = new DataTransfer();
+                        dt.items.add(e.dataTransfer.files[0]);
+                        input.files = dt.files;
+                    }
+                    
+                    // Trigger change event
+                    const event = new Event('change');
+                    input.dispatchEvent(event);
                 }
-                
-                // Trigger change event
-                const event = new Event('change');
-                input.dispatchEvent(event);
-            }
-        }, false);
+            }, false);
+        } else {
+            // Mobile: Add touch feedback
+            zone.addEventListener('touchstart', () => {
+                zone.classList.add('active');
+            });
+            
+            zone.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    zone.classList.remove('active');
+                }, 300);
+            });
+        }
         
         // Open file dialog when clicking on the drop zone
         zone.addEventListener('click', () => {
@@ -86,19 +120,54 @@ function updateFileList(files, fileListElement) {
         return;
     }
     
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
     Array.from(files).forEach(file => {
         const li = document.createElement('li');
-        li.className = 'list-group-item d-flex justify-content-between align-items-center';
         
-        const nameSpan = document.createElement('span');
-        nameSpan.textContent = file.name;
+        if (isMobile && file.name.length > 20) {
+            // Mobile: better handling for long filenames
+            li.className = 'list-group-item';
+            
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'text-truncate mb-1';
+            nameDiv.title = file.name;
+            nameDiv.textContent = file.name;
+            
+            const sizeDiv = document.createElement('div');
+            sizeDiv.className = 'd-flex justify-content-between align-items-center';
+            
+            const fileTypeSpan = document.createElement('span');
+            fileTypeSpan.className = 'badge bg-secondary me-2';
+            fileTypeSpan.textContent = 'PDF';
+            
+            const sizeSpan = document.createElement('span');
+            sizeSpan.className = 'badge bg-primary';
+            sizeSpan.textContent = formatFileSize(file.size);
+            
+            sizeDiv.appendChild(fileTypeSpan);
+            sizeDiv.appendChild(sizeSpan);
+            
+            li.appendChild(nameDiv);
+            li.appendChild(sizeDiv);
+        } else {
+            // Desktop: standard display
+            li.className = 'list-group-item d-flex justify-content-between align-items-center';
+            
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'text-truncate me-2';
+            nameSpan.style.maxWidth = '80%';
+            nameSpan.title = file.name;
+            nameSpan.textContent = file.name;
+            
+            const sizeSpan = document.createElement('span');
+            sizeSpan.className = 'badge bg-primary rounded-pill';
+            sizeSpan.textContent = formatFileSize(file.size);
+            
+            li.appendChild(nameSpan);
+            li.appendChild(sizeSpan);
+        }
         
-        const sizeSpan = document.createElement('span');
-        sizeSpan.className = 'badge bg-primary rounded-pill';
-        sizeSpan.textContent = formatFileSize(file.size);
-        
-        li.appendChild(nameSpan);
-        li.appendChild(sizeSpan);
         fileListElement.appendChild(li);
     });
 }
@@ -271,16 +340,42 @@ function showAlert(message, type) {
     const alertsContainer = document.getElementById('alerts-container');
     if (!alertsContainer) return;
     
+    // Clear any existing alerts
+    const existingAlerts = alertsContainer.querySelectorAll('.alert');
+    existingAlerts.forEach(existingAlert => {
+        existingAlert.remove();
+    });
+    
     const alert = document.createElement('div');
     alert.className = `alert alert-${type} alert-dismissible fade show`;
     alert.role = 'alert';
     
+    // Check if it's a mobile device
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isMobile) {
+        alert.classList.add('alert-mobile');
+    }
+    
+    // Add icon based on alert type
+    let iconClass = 'info-circle';
+    if (type === 'success') iconClass = 'check-circle';
+    if (type === 'danger') iconClass = 'exclamation-circle';
+    if (type === 'warning') iconClass = 'exclamation-triangle';
+    
     alert.innerHTML = `
-        ${message}
+        <div class="d-flex align-items-center">
+            <i class="fas fa-${iconClass} me-2"></i>
+            <div>${message}</div>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     `;
     
     alertsContainer.appendChild(alert);
+    
+    // Scroll to alert on mobile
+    if (isMobile) {
+        alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     
     // Auto dismiss after 5 seconds
     setTimeout(() => {
