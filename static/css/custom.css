@@ -100,3 +100,59 @@
 .pulse {
     animation: pulse 1.5s infinite;
 }
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+    .drop-zone {
+        padding: 1.5rem 1rem;
+    }
+    
+    .card-body {
+        padding: 1.25rem;
+    }
+    
+    .hero-section {
+        min-height: 50vh;
+        padding: 1.5rem 1rem;
+    }
+    
+    .tool-section {
+        padding-top: 80px;
+        margin-top: -40px;
+    }
+    
+    h1.display-5 {
+        font-size: 2.5rem;
+    }
+    
+    .feature-icon {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .d-md-flex .btn {
+        width: 100%;
+    }
+    
+    .card-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .waitlist-form {
+        padding: 1.5rem;
+    }
+    
+    .footer {
+        text-align: center;
+    }
+    
+    .footer .text-md-end {
+        text-align: center !important;
+        margin-top: 1rem;
+    }
+}
