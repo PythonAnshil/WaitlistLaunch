@@ -2,7 +2,10 @@
 <html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#212529">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>{% block title %}PDFToolkit - Your All-in-One PDF Solution{% endblock %}</title>
     
     <!-- Bootstrap CSS -->
@@ -14,6 +17,10 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
     
+    <!-- Mobile app icon -->
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='generated-icon.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='generated-icon.png') }}">
+    
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -24,22 +31,30 @@
                 <i class="fas fa-file-pdf text-primary me-2"></i>
                 <span>PDFToolkit</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Home</a>
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %} d-flex align-items-center py-3 py-lg-2" href="/">
+                            <i class="fas fa-home me-2 d-lg-none"></i> Home
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == '/tools' %}active{% endif %}" href="/tools">PDF Tools</a>
+                        <a class="nav-link {% if request.path == '/tools' %}active{% endif %} d-flex align-items-center py-3 py-lg-2" href="/tools">
+                            <i class="fas fa-tools me-2 d-lg-none"></i> PDF Tools
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#features">Features</a>
+                        <a class="nav-link d-flex align-items-center py-3 py-lg-2" href="/#features">
+                            <i class="fas fa-star me-2 d-lg-none"></i> Features
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/#waitlist">Join Waitlist</a>
+                        <a class="nav-link d-flex align-items-center py-3 py-lg-2" href="/#waitlist">
+                            <i class="fas fa-user-plus me-2 d-lg-none"></i> Join Waitlist
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -70,30 +85,48 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="mb-3">PDFToolkit</h5>
+                    <h5 class="mb-3 d-flex align-items-center">
+                        <i class="fas fa-file-pdf text-primary me-2 d-md-none"></i> PDFToolkit
+                    </h5>
                     <p>Your all-in-one solution for PDF manipulation. Simplify your workflow with our powerful and easy-to-use tools.</p>
                 </div>
-                <div class="col-md-2 mb-4 mb-md-0">
+                <div class="col-6 col-md-2 mb-4 mb-md-0">
                     <h5 class="mb-3">Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="/" class="text-decoration-none text-light">Home</a></li>
-                        <li><a href="/tools" class="text-decoration-none text-light">PDF Tools</a></li>
-                        <li><a href="/#features" class="text-decoration-none text-light">Features</a></li>
-                        <li><a href="/#waitlist" class="text-decoration-none text-light">Join Waitlist</a></li>
+                        <li class="mb-2"><a href="/" class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="fas fa-home me-2 d-md-none small"></i> Home
+                        </a></li>
+                        <li class="mb-2"><a href="/tools" class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="fas fa-tools me-2 d-md-none small"></i> PDF Tools
+                        </a></li>
+                        <li class="mb-2"><a href="/#features" class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="fas fa-star me-2 d-md-none small"></i> Features
+                        </a></li>
+                        <li class="mb-2"><a href="/#waitlist" class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="fas fa-user-plus me-2 d-md-none small"></i> Join Waitlist
+                        </a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 mb-4 mb-md-0">
+                <div class="col-6 col-md-3 mb-4 mb-md-0">
                     <h5 class="mb-3">Tools</h5>
                     <ul class="list-unstyled">
-                        <li><a href="/tools#merge" class="text-decoration-none text-light">Merge PDFs</a></li>
-                        <li><a href="/tools#split" class="text-decoration-none text-light">Split PDF</a></li>
-                        <li><a href="/tools#compress" class="text-decoration-none text-light">Compress PDF</a></li>
-                        <li><a href="/tools#extract" class="text-decoration-none text-light">Extract Content</a></li>
+                        <li class="mb-2"><a href="/tools#merge" class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="fas fa-object-group me-2 d-md-none small"></i> Merge PDFs
+                        </a></li>
+                        <li class="mb-2"><a href="/tools#split" class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="fas fa-cut me-2 d-md-none small"></i> Split PDF
+                        </a></li>
+                        <li class="mb-2"><a href="/tools#compress" class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="fas fa-compress-alt me-2 d-md-none small"></i> Compress PDF
+                        </a></li>
+                        <li class="mb-2"><a href="/tools#extract" class="text-decoration-none text-light d-flex align-items-center">
+                            <i class="fas fa-copy me-2 d-md-none small"></i> Extract Content
+                        </a></li>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 text-center text-md-start mt-3 mt-md-0">
                     <h5 class="mb-3">Connect</h5>
-                    <div class="d-flex gap-3 fs-4">
+                    <div class="d-flex justify-content-center justify-content-md-start gap-4 fs-3 fs-md-4">
                         <a href="#" class="text-light"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="text-light"><i class="fab fa-facebook"></i></a>
                         <a href="#" class="text-light"><i class="fab fa-linkedin"></i></a>
@@ -103,10 +136,10 @@
             </div>
             <hr class="my-4">
             <div class="row">
-                <div class="col-md-6 mb-3 mb-md-0">
+                <div class="col-md-6 mb-3 mb-md-0 text-center text-md-start">
                     <p class="mb-0">&copy; 2023 PDFToolkit. All rights reserved.</p>
                 </div>
-                <div class="col-md-6 text-md-end">
+                <div class="col-md-6 text-center text-md-end">
                     <p class="mb-0">
                         <a href="#" class="text-decoration-none text-light me-3">Privacy Policy</a>
                         <a href="#" class="text-decoration-none text-light">Terms of Service</a>
@@ -115,6 +148,13 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Back to Top Button (Mobile Only) -->
+    <div class="position-fixed bottom-0 end-0 p-3 d-md-none">
+        <a href="#" class="btn btn-primary rounded-circle shadow" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
