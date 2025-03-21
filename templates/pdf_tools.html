@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block title %}PDF Tools - PDFToolkit{% endblock %}
+
+{% block extra_css %}
+<style>
+.tool-section {
+    padding-top: 100px;
+    margin-top: -60px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-dark text-light">
+    <div class="container py-4 text-center">
+        <h1 class="display-5 fw-bold mb-3">PDF Tools</h1>
+        <p class="lead mb-4">Powerful tools to manage and transform your PDF files</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="d-flex justify-content-center flex-wrap gap-2">
+                    <a href="#merge" class="btn btn-outline-light">Merge PDFs</a>
+                    <a href="#split" class="btn btn-outline-light">Split PDF</a>
+                    <a href="#compress" class="btn btn-outline-light">Compress PDF</a>
+                    <a href="#extract" class="btn btn-outline-light">Extract Content</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container py-5">
+    <!-- Alerts Container -->
+    <div id="alerts-container"></div>
+    
+    <!-- Merge PDFs Tool -->
+    <section id="merge" class="py-5 tool-section">
+        <div class="card border-0 shadow-sm mb-5">
+            <div class="card-header bg-primary text-white py-3">
+                <h2 class="card-title mb-0">
+                    <i class="fas fa-object-group me-2"></i> Merge PDFs
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <p class="card-text mb-4">Combine multiple PDF files into a single document. Upload two or more PDF files to merge them in the order they are selected.</p>
+                
+                <form id="merge-form" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <div class="drop-zone" data-list-id="merge-file-list">
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt fs-1 mb-3 text-secondary"></i>
+                                <p class="mb-2">Drag & drop PDF files here or click to browse</p>
+                                <p class="text-muted small">Select multiple files to merge them together</p>
+                                <input type="file" id="merge-files" name="files[]" multiple accept=".pdf" class="d-none">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Selected Files:</h5>
+                        <ul id="merge-file-list" class="list-group file-list">
+                            <li class="list-group-item text-muted">No files selected</li>
+                        </ul>
+                        <small class="text-muted mt-2 d-block">Files will be merged in the order shown above.</small>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-object-group me-2"></i> Merge PDFs
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Split PDF Tool -->
+    <section id="split" class="py-5 tool-section">
+        <div class="card border-0 shadow-sm mb-5">
+            <div class="card-header bg-primary text-white py-3">
+                <h2 class="card-title mb-0">
+                    <i class="fas fa-cut me-2"></i> Split PDF
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <p class="card-text mb-4">Extract specific pages or split a PDF into multiple files. Upload a PDF file and specify the page ranges to extract.</p>
+                
+                <form id="split-form" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <div class="drop-zone" data-list-id="split-file-list">
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt fs-1 mb-3 text-secondary"></i>
+                                <p class="mb-2">Drag & drop a PDF file here or click to browse</p>
+                                <input type="file" id="split-file" name="file" accept=".pdf" class="d-none">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Selected File:</h5>
+                        <ul id="split-file-list" class="list-group file-list">
+                            <li class="list-group-item text-muted">No file selected</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="page-ranges" class="form-label">Page Ranges (optional):</label>
+                        <input type="text" class="form-control" id="page-ranges" name="page_ranges" placeholder="e.g., 1-3, 5, 7-9">
+                        <small class="text-muted">Leave empty to split into individual pages. Format: 1-3, 5, 7-9</small>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-cut me-2"></i> Split PDF
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Compress PDF Tool -->
+    <section id="compress" class="py-5 tool-section">
+        <div class="card border-0 shadow-sm mb-5">
+            <div class="card-header bg-primary text-white py-3">
+                <h2 class="card-title mb-0">
+                    <i class="fas fa-compress-alt me-2"></i> Compress PDF
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <p class="card-text mb-4">Reduce the file size of your PDF documents without losing quality. Perfect for sharing via email or uploading to websites.</p>
+                
+                <form id="compress-form" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <div class="drop-zone" data-list-id="compress-file-list">
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt fs-1 mb-3 text-secondary"></i>
+                                <p class="mb-2">Drag & drop a PDF file here or click to browse</p>
+                                <input type="file" id="compress-file" name="file" accept=".pdf" class="d-none">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Selected File:</h5>
+                        <ul id="compress-file-list" class="list-group file-list">
+                            <li class="list-group-item text-muted">No file selected</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-compress-alt me-2"></i> Compress PDF
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Extract Content Tool -->
+    <section id="extract" class="py-5 tool-section">
+        <div class="card border-0 shadow-sm mb-5">
+            <div class="card-header bg-primary text-white py-3">
+                <h2 class="card-title mb-0">
+                    <i class="fas fa-copy me-2"></i> Extract Content
+                </h2>
+            </div>
+            <div class="card-body p-4">
+                <p class="card-text mb-4">Extract text or images from your PDF files. Upload a PDF file and choose what you want to extract.</p>
+                
+                <form id="extract-form" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <div class="drop-zone" data-list-id="extract-file-list">
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt fs-1 mb-3 text-secondary"></i>
+                                <p class="mb-2">Drag & drop a PDF file here or click to browse</p>
+                                <input type="file" id="extract-file" name="file" accept=".pdf" class="d-none">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Selected File:</h5>
+                        <ul id="extract-file-list" class="list-group file-list">
+                            <li class="list-group-item text-muted">No file selected</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>What to extract:</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="extraction_type" id="extract-text" value="text" checked>
+                            <label class="form-check-label" for="extract-text">
+                                <i class="fas fa-font me-2"></i> Text
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="extraction_type" id="extract-images" value="images">
+                            <label class="form-check-label" for="extract-images">
+                                <i class="fas fa-image me-2"></i> Images
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-copy me-2"></i> Extract Content
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/pdf_tools.js') }}"></script>
+{% endblock %}

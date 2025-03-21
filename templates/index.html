@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block title %}PDFToolkit - Your All-in-One PDF Solution{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-lg-start">
+                <h1 class="display-4 fw-bold mb-4">Transform How You Work With PDFs</h1>
+                <p class="lead mb-4">PDFToolkit gives you powerful tools to merge, split, compress, and extract content from your PDF files. Simple, fast, and secure.</p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-lg-start justify-content-center">
+                    <a href="/tools" class="btn btn-primary btn-lg px-4">Try Tools Now</a>
+                    <a href="#waitlist" class="btn btn-outline-light btn-lg px-4">Join Waitlist</a>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0">
+                <div class="p-5 bg-dark rounded-3 shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 512 512" style="max-height: 300px;">
+                        <path fill="#E2E5E7" d="M128 0c-17.6 0-32 14.4-32 32v448c0 17.6 14.4 32 32 32h320c17.6 0 32-14.4 32-32V128L352 0H128z"/>
+                        <path fill="#B0B7BD" d="M384 128h96L352 0v96c0 17.6 14.4 32 32 32z"/>
+                        <path fill="#CAD1D8" d="M480 224l-96-96h96z"/>
+                        <path fill="#F15642" d="M416 416c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V256c0-8.8 7.2-16 16-16h352c8.8 0 16 7.2 16 16v160z"/>
+                        <path fill="#FFFFFF" d="M101.744 303.152c0-4.224 3.328-8.832 8.688-8.832h29.552c16.64 0 31.616 11.136 31.616 32.48 0 20.224-14.976 31.488-31.616 31.488h-21.36v16.896c0 5.632-3.584 8.816-8.192 8.816-4.224 0-8.688-3.184-8.688-8.816v-72.032zm16.88 7.28v31.872h21.36c8.576 0 15.36-7.568 15.36-15.504 0-8.944-6.784-16.368-15.36-16.368h-21.36zM196.656 384c-4.224 0-8.832-2.304-8.832-7.92v-72.672c0-4.592 4.608-7.936 8.832-7.936h29.296c58.464 0 57.184 88.528 1.152 88.528h-30.448zm8.064-72.912V368.4h21.232c34.544 0 36.08-57.312 0-57.312H204.72zm99.152 1.024v20.336h32.624c4.608 0 9.216 4.608 9.216 9.072 0 4.224-4.608 7.68-9.216 7.68h-32.624v26.864c0 4.48-3.184 7.92-7.664 7.92-5.632 0-9.072-3.44-9.072-7.92v-72.672c0-4.592 3.456-7.936 9.072-7.936h44.912c5.632 0 8.96 3.344 8.96 7.936 0 4.096-3.328 8.704-8.96 8.704h-37.248v.016z"/>
+                        <path fill="#CAD1D8" d="M400 432H96v16h304c8.8 0 16-7.2 16-16v-16c0 8.8-7.2 16-16 16z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-body-tertiary" id="features">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Powerful PDF Tools</h2>
+            <p class="lead">Everything you need to work with PDF files in one place</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-object-group"></i>
+                        </div>
+                        <h4 class="card-title">Merge PDFs</h4>
+                        <p class="card-text">Combine multiple PDF files into a single document in seconds.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h4 class="card-title">Split PDF</h4>
+                        <p class="card-text">Extract specific pages or split a PDF into multiple files.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-compress-alt"></i>
+                        </div>
+                        <h4 class="card-title">Compress PDF</h4>
+                        <p class="card-text">Reduce file size without losing quality for easier sharing.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <h4 class="card-title">Extract Content</h4>
+                        <p class="card-text">Extract text and images from any PDF document.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="/tools" class="btn btn-primary btn-lg">Try Our Tools</a>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">How It Works</h2>
+            <p class="lead">Simple three-step process to transform your PDF files</p>
+        </div>
+        
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3 mx-auto mb-4" style="width: 80px; height: 80px;">
+                            <i class="fas fa-upload text-primary" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="card-title">1. Upload</h4>
+                        <p class="card-text">Select and upload your PDF files securely to our platform.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3 mx-auto mb-4" style="width: 80px; height: 80px;">
+                            <i class="fas fa-cog text-primary" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="card-title">2. Process</h4>
+                        <p class="card-text">Choose the tool you need and apply it to your PDF files.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3 mx-auto mb-4" style="width: 80px; height: 80px;">
+                            <i class="fas fa-download text-primary" style="font-size: 2rem;"></i>
+                        </div>
+                        <h4 class="card-title">3. Download</h4>
+                        <p class="card-text">Download your transformed PDF files instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Waitlist Section -->
+<section class="py-5 bg-primary bg-opacity-10" id="waitlist">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="display-5 fw-bold mb-4">Join Our Waitlist</h2>
+                <p class="lead mb-5">Be the first to access our premium features when we launch. Sign up for early access and exclusive offers.</p>
+                
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body p-4 p-md-5">
+                        <form id="waitlist-form" action="/signup" method="post" class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                                        <label for="name">Your Name</label>
+                                        <div class="invalid-feedback">
+                                            Please enter your name.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                        <label for="email">Your Email</label>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid mt-3">
+                                <button type="submit" class="btn btn-primary btn-lg">Join Waitlist</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-dark text-light">
+    <div class="container py-5 text-center">
+        <h2 class="display-5 fw-bold mb-4">Ready to Transform Your PDF Workflow?</h2>
+        <p class="lead mb-5">Try our free tools now or join the waitlist for premium features.</p>
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+            <a href="/tools" class="btn btn-primary btn-lg px-4">Try Free Tools</a>
+            <a href="#waitlist" class="btn btn-outline-light btn-lg px-4">Join Waitlist</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
